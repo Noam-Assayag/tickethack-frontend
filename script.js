@@ -15,7 +15,7 @@ searchBtn.addEventListener("click", async () => {
   const arrivalValue = arrival.value.trim();
   const dateValue = date.value;
 
-  const url = `http://localhost:3000/trips/search?departure=${departureValue}&arrival=${arrivalValue}&date=${dateValue}`;
+  const url = `http://tickethack-frontend-ochre.vercel.app/trips/search?departure=${departureValue}&arrival=${arrivalValue}&date=${dateValue}`;
 
   try {
     const response = await fetch(url);
@@ -57,7 +57,7 @@ function displayTrips(trips) {
 
     div.innerHTML = `
       <div>
-        <strong>${trip.departure}</strong> > <strong>${trip.arrival}</strong>
+        <strong>${trip.departure}</strong> → <strong>${trip.arrival}</strong>
       </div>
       <div>${new Date(trip.date).toLocaleDateString()}</div>
       <div>${trip.price}€</div>
@@ -87,7 +87,7 @@ function attachBookEvents() {
   buttons.forEach(btn => {
     btn.onclick = async () => {
       try {
-        await fetch("http://localhost:3000/cart", {
+        await fetch("http://tickethack-frontend-ochre.vercel.app/cart", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
