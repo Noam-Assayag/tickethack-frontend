@@ -15,7 +15,7 @@ searchBtn.addEventListener("click", async () => {
   const arrivalValue = arrival.value.trim();
   const dateValue = date.value;
 
-  const url = `https://tickethack-frontend-ochre.vercel.app/trips/search?departure=${departureValue}&arrival=${arrivalValue}&date=${dateValue}`;
+  const url = `https://tickethack-backend-sandy.vercel.app/trips/search?departure=${departureValue}&arrival=${arrivalValue}&date=${dateValue}`;
 
   try {
     const response = await fetch(url);
@@ -87,7 +87,7 @@ function attachBookEvents() {
   buttons.forEach(btn => {
     btn.onclick = async () => {
       try {
-        await fetch("https://tickethack-frontend-ochre.vercel.app/cart", {
+        await fetch("https://tickethack-backend-sandy.vercel.app/cart", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
