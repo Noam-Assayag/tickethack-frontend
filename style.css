@@ -199,6 +199,11 @@ body {
     padding: 12px;
     margin-bottom: 10px;
     border-radius: 6px;
+    font-size: 14px;
+}
+
+.trip div{
+  padding: 0 15px;
 }
 
 .book-btn {
@@ -343,6 +348,10 @@ body {
   min-height: 100vh;
 }
 
+.title-bookings{
+  text-align: center;
+  padding-bottom: 20px;
+}
 .bookingsList {
   display: flex;
   flex-direction: column;

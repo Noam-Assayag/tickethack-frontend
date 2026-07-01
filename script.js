@@ -57,7 +57,7 @@ function displayTrips(trips) {
 
     div.innerHTML = `
       <div>
-        <strong>${trip.departure}</strong> → <strong>${trip.arrival}</strong>
+        <strong>${trip.departure}</strong> > <strong>${trip.arrival}</strong>
       </div>
       <div>${new Date(trip.date).toLocaleDateString()}</div>
       <div>${trip.price}€</div>
