@@ -7,6 +7,9 @@ const tripsList = document.querySelector(".tripsList");
 const defaultMessage = document.getElementById("defaultMessage");
 const noResult = document.getElementById("noResult");
 
+/***********************
+ * SEARCH BACKEND
+ ************************/
 searchBtn.addEventListener("click", async () => {
   const departureValue = departure.value.trim();
   const arrivalValue = arrival.value.trim();
@@ -14,33 +17,39 @@ searchBtn.addEventListener("click", async () => {
 
   const url = `http://localhost:3000/trips/search?departure=${departureValue}&arrival=${arrivalValue}&date=${dateValue}`;
 
-  const response = await fetch(url);
-  const data = await response.json();
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
 
-  const trips = data.trips;
-  console.log("BACKEND RESPONSE:", data);
-console.log("TRIPS:", data.trips);
+    const trips = data.trips;
 
-  // RESET UI
-  defaultMessage.style.display = "none";
-  noResult.style.display = "none";
-  tripsList.innerHTML = "";
-  tripsList.style.display = "none";
+    // RESET UI
+    defaultMessage.style.display = "none";
+    noResult.style.display = "none";
+    tripsList.innerHTML = "";
+    tripsList.style.display = "none";
 
-  // NO RESULT
-  if (!trips || trips.length === 0) {
-    noResult.style.display = "flex";
-    return;
+    // NO RESULT
+    if (!trips || trips.length === 0) {
+      noResult.style.display = "flex";
+      return;
+    }
+
+    // SHOW RESULTS
+    tripsList.style.display = "flex";
+    displayTrips(trips);
+
+  } catch (error) {
+    console.error("Fetch error:", error);
   }
-
-  // SHOW RESULTS
-  tripsList.style.display = "flex";
-
-  displayTrips(trips);
 });
 
-// Affiche les résultats
+/***********************
+ * DISPLAY TRIPS
+ ************************/
 function displayTrips(trips) {
+  tripsList.innerHTML = "";
+
   trips.forEach(trip => {
     const div = document.createElement("div");
     div.classList.add("trip");
@@ -49,12 +58,41 @@ function displayTrips(trips) {
       <div>
         <strong>${trip.departure}</strong> → <strong>${trip.arrival}</strong>
       </div>
-      <div>${trip.date}</div>
+      <div>${new Date(trip.date).toLocaleDateString()}</div>
       <div>${trip.price}€</div>
-      <button class="book-btn">Book</button>
+      <button class="book-btn" data-id="${trip._id}">
+        Book
+      </button>
     `;
 
     tripsList.appendChild(div);
+  });
+
+  addCartEvents();
+}
+
+/***********************
+ * ADD TO CART
+ ************************/
+function addCartEvents() {
+  const buttons = document.querySelectorAll(".book-btn");
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const tripId = btn.dataset.id;
+
+      // 1. ajouter au panier
+      await fetch("http://localhost:3000/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ tripId })
+      });
+
+      // 2. redirection
+      window.location.href = "cart.html";
+    });
   });
 }
 
