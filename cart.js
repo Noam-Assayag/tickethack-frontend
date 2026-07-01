@@ -46,7 +46,7 @@ async function loadCart() {
       div.classList.add("cartItem");
 
       div.innerHTML = `
-        <span>${item.departure} → ${item.arrival}</span>
+        <span>${item.departure} > ${item.arrival}</span>
         <span>${new Date(item.date).toLocaleString()}</span>
         <span>${item.price}€</span>
         <button class="delete-btn" data-id="${item._id}">x</button>
