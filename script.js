@@ -18,24 +18,28 @@ searchBtn.addEventListener("click", async () => {
   const data = await response.json();
 
   const trips = data.trips;
+  console.log("BACKEND RESPONSE:", data);
+console.log("TRIPS:", data.trips);
 
   // RESET UI
   defaultMessage.style.display = "none";
   noResult.style.display = "none";
   tripsList.innerHTML = "";
+  tripsList.style.display = "none";
 
-  // EMPTY RESULT
+  // NO RESULT
   if (!trips || trips.length === 0) {
     noResult.style.display = "flex";
     return;
   }
 
-  // SHOW LIST
-  tripsList.style.display = "block";
+  // SHOW RESULTS
+  tripsList.style.display = "flex";
 
   displayTrips(trips);
 });
 
+// Affiche les résultats
 function displayTrips(trips) {
   trips.forEach(trip => {
     const div = document.createElement("div");

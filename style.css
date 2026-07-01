@@ -186,10 +186,10 @@ body {
 }
 
 .tripsList {
-    display: none;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-
 
 .trip {
     display: flex;
