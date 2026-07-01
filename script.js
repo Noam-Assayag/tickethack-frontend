@@ -7,7 +7,6 @@ const tripsList = document.querySelector(".tripsList");
 const defaultMessage = document.getElementById("defaultMessage");
 const noResult = document.getElementById("noResult");
 
-/****** RECHERCHE BACKEND *****/
 searchBtn.addEventListener("click", async () => {
   const departureValue = departure.value.trim();
   const arrivalValue = arrival.value.trim();
@@ -15,47 +14,45 @@ searchBtn.addEventListener("click", async () => {
 
   const url = `http://localhost:3000/trips/search?departure=${departureValue}&arrival=${arrivalValue}&date=${dateValue}`;
 
-  console.log("URL CALL:", url);
-
   const response = await fetch(url);
-
   const data = await response.json();
-
-  console.log("BACKEND RESPONSE:", data);
 
   const trips = data.trips;
 
+  // RESET UI
   defaultMessage.style.display = "none";
   noResult.style.display = "none";
-  tripsList.style.display = "none";
   tripsList.innerHTML = "";
 
+  // EMPTY RESULT
   if (!trips || trips.length === 0) {
     noResult.style.display = "flex";
     return;
   }
 
-  tripsList.style.display = "flex";
+  // SHOW LIST
+  tripsList.style.display = "block";
+
   displayTrips(trips);
 });
+
 function displayTrips(trips) {
-  trips.forEach((trip) => {
+  trips.forEach(trip => {
     const div = document.createElement("div");
     div.classList.add("trip");
 
     div.innerHTML = `
-      <span>${trip.departure}</span>
-      <span>${trip.arrival}</span>
-      <span>${trip.date}</span>
-      <span>${trip.price}€</span>
+      <div>
+        <strong>${trip.departure}</strong> → <strong>${trip.arrival}</strong>
+      </div>
+      <div>${trip.date}</div>
+      <div>${trip.price}€</div>
       <button class="book-btn">Book</button>
     `;
 
     tripsList.appendChild(div);
   });
 }
-
-
 
      /*<div id="noResult">
         <img src="images/notfound.png" alt="No result">
