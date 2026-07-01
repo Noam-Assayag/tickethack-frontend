@@ -5,30 +5,66 @@ const date = document.querySelector(".date");
 
 const tripsList = document.querySelector(".tripsList");
 const defaultMessage = document.getElementById("defaultMessage");
+const noResult = document.getElementById("noResult");
 
-
-/******** Recherche backend *******/
+/****** RECHERCHE BACKEND *****/
 searchBtn.addEventListener("click", async () => {
-  const departureValue = departure.value;
-  const arrivalValue = arrival.value;
+  const departureValue = departure.value.trim();
+  const arrivalValue = arrival.value.trim();
   const dateValue = date.value;
 
-  const response = await fetch(`http://localhost:3000/trips?departure=${departureValue}&arrival=${arrivalValue}&date=${dateValue}`);
+  const url = `http://localhost:3000/trips/search?departure=${departureValue}&arrival=${arrivalValue}&date=${dateValue}`;
 
-  const trips = await response.json();
+  console.log("URL CALL:", url);
 
+  const response = await fetch(url);
+
+  const data = await response.json();
+
+  console.log("BACKEND RESPONSE:", data);
+
+  const trips = data.trips;
+
+  defaultMessage.style.display = "none";
+  noResult.style.display = "none";
+  tripsList.style.display = "none";
+  tripsList.innerHTML = "";
+
+  if (!trips || trips.length === 0) {
+    noResult.style.display = "flex";
+    return;
+  }
+
+  tripsList.style.display = "flex";
   displayTrips(trips);
 });
+function displayTrips(trips) {
+  trips.forEach((trip) => {
+    const div = document.createElement("div");
+    div.classList.add("trip");
 
-/**** PAS DE RESULTAT  
-     <div id="noResult">
+    div.innerHTML = `
+      <span>${trip.departure}</span>
+      <span>${trip.arrival}</span>
+      <span>${trip.date}</span>
+      <span>${trip.price}€</span>
+      <button class="book-btn">Book</button>
+    `;
+
+    tripsList.appendChild(div);
+  });
+}
+
+
+
+     /*<div id="noResult">
         <img src="images/notfound.png" alt="No result">
         <div class="separator"></div>
         <p>No trip found.</p>
-    </div>
-****/
+    </div>*/
 
-/********* AFFICHER LE RESULTAT ********/
+
+/********* AFFICHER LE RESULTAT *******
 function displayTrips(trips) {
   tripsList.innerHTML = "";
 
@@ -51,7 +87,7 @@ function displayTrips(trips) {
 
     tripsList.appendChild(div);
   });
-}
+}*/
 
 
 

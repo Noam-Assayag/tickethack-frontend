@@ -26,12 +26,12 @@
         <p class="description">Compare, book and enjoy cheap prices for train tickets: your journey starts on Tickethack.</p>
         <div id="searchTrips">
             <div class="left">
-                <div class="inputs">
-                    <input type="text" placeholder="Departure">
-                    <input type="text" placeholder="Arrival">
+               <div class="inputs">
+                    <input type="text" class="departure" placeholder="Departure">
+                    <input type="text" class="arrival" placeholder="Arrival">
                 </div>
 
-                <input class="date" type="date">
+                    <input type="date" class="date">
 
                 <button class="search-btn">Search</button>
             </div>
@@ -41,12 +41,17 @@
                     <div class="separator"></div>
                     <p>It's time to book your future trip.</p>
                 </div>
+                <div id="noResult">
+                    <img src="images/notfound.png" alt="No result">
+                    <div class="separator"></div>
+                    <p>No trip found.</p>
+                </div>
                 <div class="tripsList"></div>
 
             </div>
         </div>
     </div>
     
-
+<script src="script.js"></script>
 </body>
 </html>
