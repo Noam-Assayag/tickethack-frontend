@@ -15,7 +15,7 @@ searchBtn.addEventListener("click", async () => {
   const arrivalValue = arrival.value.trim();
   const dateValue = date.value;
 
-  const url = `http://tickethack-frontend-ochre.vercel.app/trips/search?departure=${departureValue}&arrival=${arrivalValue}&date=${dateValue}`;
+  const url = `https://tickethack-frontend-ochre.vercel.app/trips/search?departure=${departureValue}&arrival=${arrivalValue}&date=${dateValue}`;
 
   try {
     const response = await fetch(url);
