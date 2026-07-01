@@ -11,7 +11,7 @@ if (!cartList || !totalPriceEl || !purchaseBtn) {
   loadCart();
 
   purchaseBtn.addEventListener("click", async () => {
-    await fetch("https://tickethack-frontend-ochre.vercel.app/cart/purchase", {
+    await fetch("${BACKEND_URL}/cart/purchase", {
       method: "POST"
     });
 
@@ -21,7 +21,7 @@ if (!cartList || !totalPriceEl || !purchaseBtn) {
 
 async function loadCart() {
   try {
-    const res = await fetch("https://tickethack-frontend-ochre.vercel.app/cart");
+    const res = await fetch("${BACKEND_URL}/cart");
     const data = await res.json();
 
     const items = data.cart;
@@ -59,7 +59,7 @@ async function loadCart() {
 
     document.querySelectorAll(".delete-btn").forEach(btn => {
       btn.addEventListener("click", async () => {
-        await fetch(`https://tickethack-frontend-ochre.vercel.app/cart/${btn.dataset.id}`, {
+        await fetch(`${BACKEND_URL}/cart/${btn.dataset.id}`, {
           method: "DELETE"
         });
 
