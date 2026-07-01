@@ -1,0 +1,354 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Work Sans", sans-serif;
+}
+
+/* BODY */
+body {
+    background: white;
+}
+
+
+/****** MENU ******/
+#menu {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #FEFEFE;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+
+
+/**** HOME PAGE *****/
+.homePage{
+    display: flex;
+    color: #459E85;
+    padding-left: 15px;
+    font-size: 28px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+#nav-links a{
+    font-size: 14px;
+    font-weight: 600;
+    color: #414445;
+    text-decoration: none;
+    padding: 0 15px;
+    transition: color .2s ease;
+}
+#nav-links a:hover{
+    color: #459E85;
+}
+
+/****** BODY ******/
+#content{
+    min-height: 100vh;
+    width: 100%;
+    background: url(images/background.jpg) top/cover no-repeat;
+    padding-top: 110px;
+}
+
+.description-title{
+    color: white;
+    text-align: center;
+    margin: 30px 0;
+    font-weight: 500;
+    font-size: 38px;
+
+}
+
+.description{
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 300;
+}
+
+#searchTrips{
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    max-width: 950px;
+    margin: 50px auto 0;
+}
+
+.left {
+    width: 400px;
+    height: 420px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputs {
+    background: #EFF2F1;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.inputs input {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    border: none;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+.inputs input:first-child {
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.inputs input,
+.date {
+    font-size: 16px;
+}
+
+.inputs input:focus,
+.date:focus {
+    outline: none;
+}
+
+.date {
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    padding: 0 15px;
+    border: none;
+    border-radius: 5px;
+    background: #EFF2F1;
+    box-sizing: border-box;
+}
+
+.search-btn {
+    width: 100%;
+    height: 45px;
+    margin-top: auto;
+    border: none;
+    border-radius: 5px;
+    background: #4ca785;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+  background-color: #3f8f73;
+}
+
+/*****/
+.right {
+    width: 420px;
+    height: 420px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#defaultMessage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#defaultMessage img {
+    width: 140px;
+}
+
+.separator {
+  width: 200px;
+  height: 2px;
+  background: #55b38a;
+  margin: 20px auto;
+}
+
+#defaultMessage p {
+    font-size: 18px;
+    text-align: center;
+}
+
+.tripsList {
+    display: none;
+    width: 100%;
+}
+
+
+.trip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f4f4f4;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.book-btn {
+    background: #55b38a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+.book-btn:hover {
+  background-color: #3f8f73;
+}
+
+
+/***** CART PAGE *****/
+
+.cart-page,
+.bookings-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.page-container {
+  width: 90%;
+  max-width: 900px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  padding-top: 24px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.title-cart {
+  margin-bottom: 20px;
+  font-size: 22px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #F5EEEE;
+  padding: 14px;
+  border-radius: 6px;
+  margin: 0 24px 24px;
+}
+
+.cartItem span {
+  flex: 1;
+  text-align: center;
+}
+
+.cartItem span:first-child {
+  flex: 2;
+  text-align: left;
+}
+
+.delete-btn {
+  background-color: #55b38a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.delete-btn:hover {
+  background-color: #3f8f73;
+}
+
+.cartTotal {
+  background: #00153E;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-radius: 0 0 12px 12px;
+  font-weight: 600;
+}
+
+.cartList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.purchase-btn {
+  background: #55b38a;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.purchase-btn:hover {
+  background-color: #3f8f73;
+}
+
+/***** BOOKINGS PAGE *****/
+
+.bookings-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.bookingsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 24px 24px;
+}
+
+.bookingItem {
+  display: flex;
+ justify-content: space-between;
+  align-items: center;
+
+  background: #F5EEEE;
+  padding: 14px;
+  border-radius: 8px;
+    gap: 10px;
+}
+
+.bookingItem span {
+  flex: 1;
+  text-align: center;
+}
+
+/**/
+.green{
+    color: #3f8f73;
+}
+.center{
+    text-align: center;
+}
