@@ -8,7 +8,7 @@ const defaultMessage = document.getElementById("defaultMessage");
 const noResult = document.getElementById("noResult");
 
 /***********************
- * SEARCH BACKEND
+ * SEARCH TRIPS
  ************************/
 searchBtn.addEventListener("click", async () => {
   const departureValue = departure.value.trim();
@@ -27,11 +27,11 @@ searchBtn.addEventListener("click", async () => {
     defaultMessage.style.display = "none";
     noResult.style.display = "none";
     tripsList.innerHTML = "";
-    tripsList.style.display = "none";
 
-    // NO RESULT
+    // NO RESULTS
     if (!trips || trips.length === 0) {
       noResult.style.display = "flex";
+      tripsList.style.display = "none";
       return;
     }
 
@@ -40,9 +40,10 @@ searchBtn.addEventListener("click", async () => {
     displayTrips(trips);
 
   } catch (error) {
-    console.error("Fetch error:", error);
+    console.error("Search error:", error);
   }
 });
+
 
 /***********************
  * DISPLAY TRIPS
@@ -60,7 +61,12 @@ function displayTrips(trips) {
       </div>
       <div>${new Date(trip.date).toLocaleDateString()}</div>
       <div>${trip.price}€</div>
-      <button class="book-btn" data-id="${trip._id}">
+      <button class="book-btn"
+        data-id="${trip._id}"
+        data-departure="${trip.departure}"
+        data-arrival="${trip.arrival}"
+        data-date="${trip.date}"
+        data-price="${trip.price}">
         Book
       </button>
     `;
@@ -68,160 +74,39 @@ function displayTrips(trips) {
     tripsList.appendChild(div);
   });
 
-  addCartEvents();
+  attachBookEvents();
 }
 
+
 /***********************
- * ADD TO CART
+ * BOOK BUTTONS (CART)
  ************************/
-function addCartEvents() {
+function attachBookEvents() {
   const buttons = document.querySelectorAll(".book-btn");
 
   buttons.forEach(btn => {
-    btn.addEventListener("click", async () => {
-      const tripId = btn.dataset.id;
+    btn.onclick = async () => {
+      try {
+        await fetch("http://localhost:3000/cart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            tripId: btn.dataset.id,
+            departure: btn.dataset.departure,
+            arrival: btn.dataset.arrival,
+            date: btn.dataset.date,
+            price: btn.dataset.price
+          })
+        });
 
-      // 1. ajouter au panier
-      await fetch("http://localhost:3000/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ tripId })
-      });
+        // redirection panier
+        window.location.href = "cart.html";
 
-      // 2. redirection
-      window.location.href = "cart.html";
-    });
+      } catch (error) {
+        console.error("Cart error:", error);
+      }
+    };
   });
 }
-
-     /*<div id="noResult">
-        <img src="images/notfound.png" alt="No result">
-        <div class="separator"></div>
-        <p>No trip found.</p>
-    </div>*/
-
-
-/********* AFFICHER LE RESULTAT *******
-function displayTrips(trips) {
-  tripsList.innerHTML = "";
-
-  defaultMessage.style.display = "none";
-  tripsList.style.display = "flex";
-
-  if (trips.length === 0) {
-    tripsList.innerHTML = "<p>No trips found</p>";
-    return;
-  }
-
-  trips.forEach(trip => {
-    const div = document.createElement("div");
-    div.classList.add("trip");
-
-    div.innerHTML = `
-      <span>${trip.departure} → ${trip.arrival} | ${trip.date} | ${trip.price}€</span>
-      <button class="book-btn" data-id="${trip._id}">Add</button>
-    `;
-
-    tripsList.appendChild(div);
-  });
-}*/
-
-
-
-/*******************/
-    
-/* Quand on aura les résultats 
-defaultMessage.style.display = "none";
-tripsList.style.display = "block";
-*/
-
-/*Recherche avec résultat
-
-<div class="tripsList">
-    <span>Bruxelles > Paris</span>
-    <span>09:05</span>
-    <span>47€</span>
-    <button>Book</button>
-</div>
-*/
-
-
-
-
-/****************
-Click sur search
-***************
-
-searchBtn.addEventListener("click", async () => {
-    const departure = departureInput.value.trim();
-    const arrival = arrivalInput.value.trim();
-    const date = dateInput.value;
-
-    if (!departure || !arrival || !date) {
-        alert("Please fill all fields");
-        return;
-    }
-
-    try {
-        const res = await fetch(`http://localhost:3000/trips?departure=${departure}&arrival=${arrival}&date=${date}`);
-        
-        const data = await res.json();
-
-        displayTrips(data);
-
-    } catch (err) {
-        console.error("Error fetching trips:", err);
-    }
-});*/
-
-
-/***************************
-Affichage des résultats
-*****************************
-function displayTrips(trips) {
-
-    tripsList.innerHTML = "";
-
-    defaultMessage.style.display = "none";
-    tripsList.style.display = "block";
-
-    if (trips.length === 0) {
-        tripsList.innerHTML = "<p>No trips found</p>";
-        return;
-    }
-
-    trips.forEach(trip => {
-        const div = document.createElement("div");
-        div.classList.add("trip");
-
-        div.innerHTML = `
-            <span>${trip.departure} → ${trip.arrival}</span>
-            <span>${trip.schedule}</span>
-            <span>${trip.price}€</span>
-            <button class="book-btn">Book</button>
-        `;
-
-        const btn = div.querySelector(".book-btn");
-
-        btn.addEventListener("click", () => addToCart(trip));
-
-        tripsList.appendChild(div);
-    });
-}*/
-
-
-/************************
- AJOUTER AU PANIER
-**********************
-function addToCart(trip) {
-
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    cart.push(trip);
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    alert("Trip added to cart !");
-}*/

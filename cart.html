@@ -27,20 +27,20 @@
 
         <h2 class="title-cart">My cart</h2>
 
-        <div class="cartList">
-            <div class="cartItem">
-                <span>Bruxelles → Paris</span>
-                <span>09:05</span>
-                <span>47€</span>
-                <button class="delete-btn">x</button>
+        <div class="cartList-wrapper">
+
+            <div class="cartList"></div>
+
+            <div id="emptyCartMessage" style="display:none;">
+            <p>No ticket in your cart.<br>why not plan a trip?</p>
             </div>
-        </div>
 
-        <div class="cartTotal">
-            <span>Total : <span id="totalPrice">0€</span></span>
-            <button id="purchaseBtn" class="purchase-btn">Purchase</button>
-        </div>
+            <div class="cartTotal">
+                <span>Total : <span id="totalPrice">0€</span></span>
+                <button id="purchase-btn">Purchase</button>
+            </div>
 
+        </div>
     </div>
 
 </main>
