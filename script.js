@@ -1,3 +1,5 @@
+const API_URL = "https://tickethack-backend-sandy.vercel.app";
+
 const searchBtn = document.querySelector(".search-btn");
 const departure = document.querySelector(".departure");
 const arrival = document.querySelector(".arrival");
