@@ -87,7 +87,7 @@ function attachBookEvents() {
   buttons.forEach(btn => {
     btn.onclick = async () => {
       try {
-        await fetch("http://tickethack-frontend-ochre.vercel.app/cart", {
+        await fetch("https://tickethack-frontend-ochre.vercel.app/cart", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

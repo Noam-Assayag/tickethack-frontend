@@ -3,7 +3,7 @@ const emptyMessage = document.getElementById("emptyBookingsMessage");
 
 async function loadBookings() {
   try {
-    const res = await fetch("http://tickethack-frontend-ochre.vercel.app/bookings");
+    const res = await fetch("https://tickethack-frontend-ochre.vercel.app/bookings");
     const data = await res.json();
 
     const bookings = data.bookings;
